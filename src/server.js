@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 const express = require('express');
 const http = require('http');
 const socketIo = require('socket.io');
@@ -67,7 +66,6 @@ io.on('connection', (socket) => {
   });
   
   socket.on('storage', (ChatID) => {
-    console.log(ChatID)
     db.all('SELECT * FROM messages WHERE chatID = ?', [ChatID], function(err, row) {
       row.forEach((rows) => {
         const msg = rows.msg;
@@ -85,7 +83,7 @@ io.on('connection', (socket) => {
     let hora = `${new Date().getHours()}:${new Date().getMinutes()}`
     const msg = data.msg;
     const uid = data.uid;
-    io.to(data.ChatID).emit('chat-message', { msg, hora, uid });
+    io.emit('chat-message', { msg, hora, uid });
     db.run('INSERT INTO messages (userID, msg, hora, chatID) VALUES (?, ?, ?, ?)', [data.uid, data.msg, hora, data.ChatID])
   });
   
@@ -94,62 +92,4 @@ io.on('connection', (socket) => {
 const PORT = process.env.PORT || 3000;
 server.listen(PORT, () => {
   console.log(`Servidor rodando na porta: ${PORT}`)
-=======
-const express = require('express');
-const http = require('http');
-const socketIo = require('socket.io');
-const path = require('path');
-const cors = require('cors')
-
-
-const {
-  database
-} = require('./database/database');
-
-
-const app = express()
-
-const server = http.createServer();
-const io = new socketIo.Server(server, {
-  cors: {
-    origin: "*"
-  }
-});
-
-app.use(express.static(__dirname + '/src/client'));
-
-app.get('/', (_, res) => {
-  res.sendFile(path.join(__dirname, '..', 'src/client', 'index.html'));
-})
-
-const db = database();
-
-
-io.on('connection', (socket) => {
-
-  db.all('SELECT * FROM messages', [], function (err, row) {
-    row.forEach((rows) => {
-      io.emit('chat-message', {
-        msg: rows.msg
-      });
-    })
-  });
-
-  socket.on('chat-message', (data) => {
-    io.emit('chat-message', {
-      msg: data.msg
-    });
-    db.run('INSERT INTO messages (msg) VALUES (?)', data.msg)
-  })
-
-
-  socket.on('disconnect', () => {
-    console.log('User desconnected.');
-  })
-})
-
-const PORT = process.env.PORT || 3000;
-server.listen(PORT, () => {
-  console.log(`Servidor rodando na porta: ${PORT}`)
->>>>>>> 880909271118ae4afd854307ed190a83b3a99003
 })
