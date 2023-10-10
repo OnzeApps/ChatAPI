@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 <!DOCTYPE html>
 <html>
   <head>
@@ -14,32 +13,4 @@
     
   </body>
   <script src="js/index.js"></script>
-=======
-<!DOCTYPE html>
-<html lang="pt-BR">
-  <head>
-    <title>ChatLink</title>
-  </head>
-  <body>
-    <div id="messages"></div>
-    <input id="messageInput" autocomplete="off" />
-    <button onclick="sendMessage()">Enviar</button>
-  </body>
-  <script src="/socket.io/socket.io.js"></script>
-  <script>
-    const socket = io();
-    function sendMessage() {
-      const inputMsg = document.getElementById('messageInput');
-      const message = inputMsg.value;
-      socket.emit('chat message', message);
-      inputMsg.value = '';
-    }
-    socket.on('chat message', (msg) => {
-      const messagesList = document.getElementById('messages');
-      const listItem = document.createElement('li');
-      listItem.textContent = msg;
-      messagesList.appendChild(listItem);
-    })
-  </script>
->>>>>>> 880909271118ae4afd854307ed190a83b3a99003
 </html>
