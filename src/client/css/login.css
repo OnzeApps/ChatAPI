@@ -1,0 +1,92 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  background-color: white;
+  font-family: 'Roboto', Sans-Serif;
+}
+
+.login {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: white;
+  padding: 8px;
+  text-align: center;
+  width: auto;
+  border-radius: 5px;
+}
+
+.login input {
+  outline: none;
+  border-radius: 2px;
+  border: 1px solid #000000;
+  padding: 8px;
+  margin: 4px;
+  height: 30px;
+  width: 400px;
+}
+
+.login button {
+  padding: 8px;
+  margin: 4px;
+  margin-top: 10px;
+  height: 40px;
+  width: 415px;
+  outline: none;
+  border: none;
+  background-color: black;
+  border-radius: 2px;
+  color: white;
+  font-size: 18px;
+}
+
+.login h3 {
+  background-image: linear-gradient(to right, #E91E63, #9C27B0);
+  -webkit-background-clip: text;
+  padding: 2px;
+  margin-top: 25%;
+  color: transparent;
+}
+
+.login h1 {
+  background-image: linear-gradient(to right, #E91E63, #9C27B0);
+  -webkit-background-clip: text;
+  color: transparent;
+  margin-bottom: 25%;
+}
+
+.download {
+  text-align: center;
+  padding-top: 10px;
+}
+
+.download h1 {
+  background-image: linear-gradient(to right, #E91E63, #9C27B0);
+  -webkit-background-clip: text;
+  color: transparent;
+  padding: 4px;
+  margin: 0px;
+}
+
+alert {
+  padding: 15px;
+  background-color: #f44336;
+  color: white;
+  border-radius: 4px;
+}
+
+.closebtn {
+  margin-left: 15px;
+  color: white;
+  font-weight: bold;
+  float: right;
+  font-size: 20px;
+  line-height: 10px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.closebtn:hover {
+  color: black;
+}
