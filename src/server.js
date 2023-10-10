@@ -64,29 +64,30 @@ io.on('connection', (socket) => {
   socket.on('Room', (ChatID) => {
     socket.join(ChatID);
   });
-  
+
   socket.on('storage', (ChatID) => {
-    db.all('SELECT * FROM messages WHERE chatID = ?', [ChatID], function(err, row) {
+    db.all('SELECT * FROM messages WHERE chatID = ?', [ChatID], function (err, row) {
       row.forEach((rows) => {
         const msg = rows.msg;
         const hora = rows.hora;
         const uid = rows.userID;
-        
+
         io.to(ChatID).emit('chat-message', {
           msg, hora, uid
         });
       });
     });
   });
-  
+
   socket.on('chat-message', (data) => {
+    console.log(data)
     let hora = `${new Date().getHours()}:${new Date().getMinutes()}`
     const msg = data.msg;
     const uid = data.uid;
-    io.emit('chat-message', { msg, hora, uid });
+    io.to(data.ChatID).emit('chat-message', { msg, hora, uid });
     db.run('INSERT INTO messages (userID, msg, hora, chatID) VALUES (?, ?, ?, ?)', [data.uid, data.msg, hora, data.ChatID])
   });
-  
+
 });
 
 const PORT = process.env.PORT || 3000;

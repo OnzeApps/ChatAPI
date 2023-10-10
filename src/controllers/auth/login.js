@@ -15,23 +15,25 @@ const login = async (req, res) => {
       email,
       password
     } = await schema.validate(req.body, {
-        abortEarly: true
-      }
+      abortEarly: true
+    }
     );
-    
+
     const db = database();
-    
+
     db.get('SELECT * FROM usuarios WHERE email = ? ', email, (error, row) => {
-      
+
+      console.log(row)
+
       if (error) {
         return res.status(400).json({
           success: false,
           message: error.message
         });
       }
-      
+
       const VerifyPass = verifyPassword(password, row.password)
-      
+
       if (row && VerifyPass) {
         return res.status(200).json({
           success: true,
@@ -46,7 +48,7 @@ const login = async (req, res) => {
       }
     })
 
-  } catch(error) {
+  } catch (error) {
 
     if (error instanceof yup.ValidationError) {
       return res.status(400).json(

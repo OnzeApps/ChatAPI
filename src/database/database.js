@@ -1,7 +1,7 @@
 const sqlite3 = require('sqlite3').verbose();
 
 function database() {
-  return new sqlite3.Database('./database/database.db');
+  return new sqlite3.Database('./src/database/database.db');
 }
 
 async function createTablePost() {
